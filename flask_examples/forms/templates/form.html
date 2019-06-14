@@ -1,0 +1,65 @@
+{% from "_render_field.html" import render_field %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Demo Flask-WForm</title>
+
+        <script type="text/javascript">
+            var verifyCallback = function ( response ) {
+                alert( response );
+            };
+            var verifyErrorCallback = function ( response ) {
+                alert( response );
+            };
+            var onloadCallback = function () {
+                grecaptcha.render( 'example3', {
+                    'sitekey': '6LdW844UAAAAAJ-eELC_SazaO5_nFvzJvhLiaytg',
+                    'theme': 'dark', //default: light
+                    'size': 'compact', //default:dark
+                    'callback': verifyCallback,
+                    'error-callback': verifyErrorCallback
+                } );
+            };
+
+        </script>
+
+    </head>
+
+    <body>
+        <form method="POST" action="{{ url_for('form') }}">
+            {{ form.csrf_token }}
+
+            {{ render_field(form.username) }}
+
+            {{ render_field(form.password) }}
+
+            {{ render_field(form.gender) }}
+
+            {{ form.recaptcha }}
+            {% for error in form.recaptcha.errors %}
+            <ul>
+                <li style="color:red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+            <br />
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <!-- POSTs back to the page's URL upon submit with a g-recaptcha-response POST parameter. -->
+        <form action="?" method="POST">
+            <div id="example3"></div>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+        </script>
+
+    </body>
+
+</html>

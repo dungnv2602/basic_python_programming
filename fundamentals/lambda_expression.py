@@ -3,7 +3,7 @@ def multiply(x, y):
 
 
 # Use lambda
-def multipply_lambda(x, y): return x * y
+def multiply_lambda(x, y): return x * y
 
 
 double = multipply_lambda(4, 7)

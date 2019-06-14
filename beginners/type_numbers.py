@@ -1,0 +1,8 @@
+print(type(4.5))
+print(type(4))
+x = int(4.7)
+y = float(4)
+print(x)
+print(type(x))
+print(y)
+print(type(y))

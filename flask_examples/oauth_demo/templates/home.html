@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flask-Dance Multi-User SQLAlchemy</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul class="flash">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">message</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith%}
+    {% if current_user.is_authenticated %}
+        You are logged in as {{ current_user.username }}!
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+        You are not log in
+        <a href="{{ url_for('github.login') }}">Login</a>
+    {% endif %}
+</body>
+</html>
